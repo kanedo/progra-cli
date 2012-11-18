@@ -1,0 +1,35 @@
+#!/usr/bin/php
+<?php
+$defaults = array(
+	'p' => './', //Path
+	'e' =>'1', //Übungsnummer
+	'm' =>'/usr/bin/progra-src/master.tex', //LaTeX-File
+);
+$options = array_merge($defaults, getopt("p:e:m:"));
+if(file_exists(realpath($options['m']))){
+	$tex = file_get_contents(realpath($options['m']));
+	$tex = str_replace('%%exercise%%', $options['e'], $tex);
+	$tex_file_string = "";
+	if ($handle = opendir($options['p'])) {
+	    while (false !== ($file = readdir($handle))) {
+	        
+			if(pathinfo($file, PATHINFO_EXTENSION) == "java"){
+				$filename = $file;
+				$path = realpath($options['p']."/".$file);
+				$tex_file_string .= "\\textbf{".$filename."}\n
+							\begin{framed}\n
+							\t\lstset{language=Java, numbers=left, breaklines=true, showspaces=false, showstringspaces=false, morecomment=[l]{//}, tabsize=2}\n
+							\t\lstinputlisting{".$path."}\n
+							\end{framed}\n";
+			}
+	    }
+	    closedir($handle);
+	}
+	$tex = str_replace("%%content%%", $tex_file_string, $tex);
+	$save_path = realpath($options['p']."/")."/uebung{$options['e']}.tex";
+	file_put_contents($save_path, $tex);
+	echo "done. \n You can find your LaTeX file at \n {$save_path}\n";
+}else{
+	echo "Can't find master.tex in ".$options['m']."\n";
+}
+?>
