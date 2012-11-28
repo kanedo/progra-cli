@@ -1,42 +1,103 @@
-%% Dokumentenklasse (Koma Script) -----------------------------------------
-\documentclass[%
-   11pt,              % Schriftgroesse
-   ngerman,           % wird an andere Pakete weitergereicht
-   a4paper,           % Seitengroesse
-   DIV11,             % Textbereichsgroesse (siehe Koma Skript Dokumentation !)
-]{scrartcl}%     Klassen: scrartcl, scrreprt, scrbook
-% -------------------------------------------------------------------------
-
-\usepackage[utf8]{inputenc} % Font Encoding, benoetigt fuer Umlaute
-\usepackage[ngerman]{babel}   % Spracheinstellung
-
-\usepackage[T1]{fontenc} % T1 Schrift Encoding
-\usepackage{textcomp}    % Zusatzliche Symbole (Text Companion font extension)
-\usepackage{lmodern}     % Latin Modern Schrift
-\usepackage{listings}
-\usepackage{framed}
-
-\usepackage[left=2cm,right=3cm,top=2cm,bottom=2cm,includeheadfoot]{geometry}
-%Kopf- und Fußzeile
+\documentclass[a4paper,12pt]{article}
+\usepackage[english]{babel}
+\usepackage{array}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[scaled]{beramono}
+\usepackage{graphicx}
 \usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-%Übungsteilnehmer
-\fancyhead[L]{PEOPLE}
-%Kopfzeile mittig
-\fancyhead[C]{Übung %%exercise%% Programmierung}
-%Linie oben
-\renewcommand{\headrulewidth}{0.5pt}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{stmaryrd}
+\usepackage{lineno}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{vaucanson-g}
+%\usepackage{pstricks}
+\usepackage{auto-pst-pdf}
+\usepackage{pst-node,pst-tree}
+\usepackage{subfig}
+\usepackage{wrapfig}
+\usepackage{etex}
 
-%Fußzeile links bzw. innen
-\fancyfoot[L]{}
-%Fußzeile rechts bzw. außen
-\fancyfoot[R]{\thepage}
-%Linie unten
-\renewcommand{\footrulewidth}{0.5pt}
-%% Dokument Beginn %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[scale=0.78]{geometry} 
+
+% ===========================================
+% Variablen
+% ===========================================
+\newcommand\uebnr{%%excercise%%}
+\newcommand\teilnehmera{PEOPLE1}
+\newcommand\teilnehmerb{PEOPLE2}
+\newcommand\vorlesung{Übung Programmierung }
+% ===========================================
+
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+\setlength{\unitlength}{1mm}
+\setlength{\parindent}{0pt}
+\pagestyle{fancy}
+\parskip1.5ex
+
+\newenvironment{packed_enum}{
+\begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{enumerate}}
+
+\newenvironment{packed_itemize}{
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{1pt}
+  \setlength{\parsep}{1pt}
+}{\end{itemize}}
+
+\makeatletter
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+
+\renewcommand\thesection{Exercise \uebnr.\arabic{section}}
+\renewcommand\thesubsection{\alph{subsection})}
+\renewcommand\thesubsubsection{\roman{subsubsection})}
+\newcommand\tick{\quad \checkmark}
+\newcommand\widerspruch{\quad \lightning}
+
+\newcommand{\blattschwarz}[1]{\Tr{\psframebox{#1}}}
+
+\newcommand{\code}[1]{\texttt{#1}}
+\def\us{\char`\_}
+
+\SetEdgeLabelScale{.9}
+
+
+\lstset{numbers=left,tabsize=2,breaklines=true,numberstyle=\scriptsize,basicstyle=\ttfamily,language=Java}
+\lstset{literate=%
+{Ö}{{\"O}}1
+{Ä}{{\"A}}1
+{Ü}{{\"U}}1
+{ß}{{\ss}}2
+{ü}{{\"u}}1
+{ä}{{\"a}}1
+{ö}{{\"o}}1
+}
+
+\rhead[\leftmark]{}
+\lhead[\thepage]{\small \vorlesung - Series \uebnr \\ \teilnehmera, \teilnehmerb}
+\normalsize
 \begin{document}
+
+\title{ \vorlesung - Series \uebnr}
+\author{\teilnehmera \and \teilnehmerb}
+\maketitle
+\newpage
+
+% \tableofcontents
+% \newpage
+
 %%content%%
-%% Dokument ENDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
 

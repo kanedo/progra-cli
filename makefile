@@ -1,8 +1,9 @@
 #Übungsteilnehmer
-PEOPLE="Max Mustermann, 123456 Ü11 \\\\\\\\ Monika Muster, 654321 Ü11"
+PEOPLE1="Max Mustermann, 123456"
+PEOPLE2="Monika Muster, 654321 Ü11"
 
 # DON'T EDIT HERE!!!
-REPLACE_USER := $(shell sed -e s/PEOPLE/""$(PEOPLE)""/ master_master.tex > master.tex)
+REPLACE_USER := $(shell sed -e s/PEOPLE1/""$(PEOPLE1)""/ master_master.tex | sed -e s/PEOPLE2/""$(PEOPLE2)""/ > master.tex)
 PHP = $(shell which php)
 REPLACE_PHP := $(shell sed -e "s|PHP|$(PHP)|" ./progra_master > progra)
 all: 
